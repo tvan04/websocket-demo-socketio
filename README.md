@@ -22,3 +22,5 @@ Currently, the code echoes each message back only to the sender. Your challenge 
 Hint:
     In server.js, locate the message event handler and replace the line below with a loop through wss.clients:
       ws.send(`${ws.username}: ${data}`);
+      
+Hint 2: Check on client.readyState (is it receiving connections?) 
