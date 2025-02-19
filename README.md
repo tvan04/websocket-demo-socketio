@@ -4,11 +4,9 @@ This is a simple WebSocket chat application. It allows users to send messages to
 
 ## Getting Started
 
-Clone the repository and install dependencies:
-    git clone ...
-    cd websocket-chat-demo
+1) Clone the repository: I hope y'all know how to do this already
 
-Install dependencies:
+2) Install dependencies:
     npm install
 
 Run the application:
