@@ -1,22 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>WebSocket Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebSocket Chat Demo</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2em; }
-    #messages p { border-bottom: 1px solid #ddd; padding: 0.5em 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      margin: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .header {
+      background: #4a90e2;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5em;
+    }
+    .chat {
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+    .message.sent {
+      background: #e1ffc7;
+      margin-left: auto;
+      text-align: right;
+    }
+    .message.received {
+      background: #d0e9ff;
+      margin-right: auto;
+      text-align: left;
+    }
+    .input-area {
+      display: flex;
+      padding: 15px;
+      background: #f9f9f9;
+    }
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    .input-area button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background: #4a90e2;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .input-area button:hover {
+      background: #357ABD;
+    }
   </style>
 </head>
 <body>
-  <h1>WebSocket Demo</h1>
-  <div>
-    <input type="text" id="messageInput" placeholder="Enter message" />
-    <button id="sendButton">Send</button>
+  <div class="container">
+    <div class="header">
+      WebSocket Chat Demo
+    </div>
+    <div class="chat" id="chat"></div>
+    <div class="input-area">
+      <input type="text" id="messageInput" placeholder="Type your message here..." />
+      <button id="sendButton">Send</button>
+    </div>
   </div>
-  <div id="messages"></div>
 
-  <!-- Link to external client-side JavaScript -->
   <script src="client.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ import path from 'path';
 // Define the port for the HTTP server
 const port = 3000;
 
-// Create a simple HTTP server to serve static files (like client.html and client.js)
+// Create a simple HTTP server to serve static files
 const server = http.createServer((req, res) => {
   // Determine the file to serve. If no file is specified, serve client.html
   let filePath = '.' + req.url;
@@ -63,14 +63,13 @@ wss.on('connection', (ws) => {
   ws.on('message', (data) => {
     console.log(`${ws.username} sent: ${data}`);
     
-    // Current behavior: Echo the message back only to the sender.
-    ws.send(`${ws.username}: ${data}`);
-
-    // CHALLENGE:
-    // Modify the above code so that when two browsers are connected,
-    // a message sent by one browser is received by the other.
-    // Hint: Iterate through wss.clients and send the message to each client
-    // except the sender.
+    // Broadcast the message to all connected clients with the sender's name
+    wss.clients.forEach((client) => {
+      if (client !== ws && client.readyState === client.OPEN) {
+        // Each client receives a message formatted as "User X: message"
+        client.send(`${ws.username}: ${data}`);
+      }
+    });
   });
 
   ws.on('close', () => {
