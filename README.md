@@ -2,11 +2,6 @@
 
 This is a simple WebSocket chat application. It allows users to send messages to one another in real time. The current implementation echoes messages to connected clients. Your challenge is to modify the code so that messages are broadcast to all other clients (not echoed back to the sender).
 
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (version 12 or later)
-- Git
-
 ## Getting Started
 
 Clone the repository and install dependencies:
