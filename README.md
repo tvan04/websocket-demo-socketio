@@ -4,7 +4,7 @@ This is a simple WebSocket chat application. It allows users to send messages to
 
 ## Getting Started
 
-### 1. Clone the Repository
+## Clone the Repository
 
 ## Prerequisites
 
