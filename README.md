@@ -5,7 +5,7 @@ This is a simple WebSocket chat application. It allows users to send messages to
 ## Getting Started
 
 Clone the repository and install dependencies:
-    git clone https://github.com/<your-username>/websocket-chat-demo.git
+    git clone ...
     cd websocket-chat-demo
 
 Install dependencies:
