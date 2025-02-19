@@ -9,12 +9,12 @@ This is a simple WebSocket chat application. It allows users to send messages to
 2) Install dependencies:
     npm install
 
-Run the application:
+3) Run the application:
     npm start
 
-Open your web browser and navigate to http://localhost:3000. To test real-time functionality, open the URL in multiple browser tabs or windows.
+4) Open your web browser and navigate to http://localhost:3000. To test real-time functionality, open the URL in multiple browser tabs or windows.
 
-Challenge Instructions
+5) Challenge Instructions
 Currently, the code echoes each message back only to the sender. Your challenge is to modify the code so that:
     When a message is sent from one browser, it is received by all other connected clients. 
     Instead of using ws.send(...) in the message event handler, iterate through wss.clients and send the message to every client except the sender.
