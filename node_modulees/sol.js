@@ -1,78 +1,42 @@
-import http from 'http';
-import { WebSocketServer } from 'ws';
-import fs from 'fs';
-import path from 'path';
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const path = require('path');
 
-// Define the port for the HTTP server
-const port = 3000;
+// Initialize Express and HTTP server
+const app = express();
+const server = http.createServer(app);
 
-// Create a simple HTTP server to serve static files
-const server = http.createServer((req, res) => {
-  // Determine the file to serve. If no file is specified, serve client.html
-  let filePath = '.' + req.url;
-  if (filePath === './') {
-    filePath = './client.html';
-  }
+// Attach Socket.IO to the HTTP server
+const io = new Server(server);
 
-  // Map file extensions to MIME types
-  const extname = String(path.extname(filePath)).toLowerCase();
-  const mimeTypes = {
-    '.html': 'text/html',
-    '.js': 'text/javascript',
-    '.css': 'text/css'
-  };
-  const contentType = mimeTypes[extname] || 'application/octet-stream';
+// Serve static files (client.html and client.js)
+app.use(express.static(path.join(__dirname, '../public')));
 
-  // Read and serve the file
-  fs.readFile(filePath, (error, content) => {
-    if (error) {
-      if (error.code === 'ENOENT') {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('404 Not Found', 'utf-8');
-      } else {
-        res.writeHead(500);
-        res.end('Server Error: ' + error.code);
-      }
-    } else {
-      res.writeHead(200, { 'Content-Type': contentType });
-      res.end(content, 'utf-8');
-    }
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/client.html'));
+});
+
+// Handle WebSocket connections
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Send a welcome message to the connected client
+  socket.emit('message', 'Welcome to the WebSocket Chat!');
+
+  // Broadcast the message to all clients except the sender
+  socket.on('message', (msg) => {
+    io.emit('message', msg);
+  });
+
+  // Log disconnection events
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
   });
 });
 
-// Start the HTTP server
-server.listen(port, () => {
-  console.log(`HTTP server is running on http://localhost:${port}`);
-});
-
-// Attach a WebSocket server to the HTTP server
-const wss = new WebSocketServer({ server });
-
-// Global counter to assign unique usernames
-let userCount = 0;
-
-wss.on('connection', (ws) => {
-  // Assign a unique username to the connecting client
-  userCount++;
-  ws.username = `User ${userCount}`;
-  console.log(`${ws.username} connected!`);
-
-  // Notify the new user of their username
-  ws.send(`Welcome, ${ws.username}!`);
-
-  ws.on('message', (data) => {
-    console.log(`${ws.username} sent: ${data}`);
-    
-    // Broadcast the message to all connected clients with the sender's name
-    wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === client.OPEN) {
-        // Each client receives a message formatted as "User X: message"
-        client.send(`${ws.username}: ${data}`);
-      }
-    });
-  });
-
-  ws.on('close', () => {
-    console.log(`${ws.username} disconnected`);
-  });
+// Start the server
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
