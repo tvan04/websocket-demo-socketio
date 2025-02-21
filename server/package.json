@@ -1,0 +1,21 @@
+{
+    "name": "websocket-demo",
+    "version": "1.0.0",
+    "description": "A simple WebSocket demo using Socket.IO",
+    "main": "server/server.js",
+    "type": "commonjs",
+    "scripts": {
+      "start": "nodemon server/server.js"
+    },
+    "author": "Your Name",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.18.2",
+      "socket.io": "^4.8.1",
+      "ws": "^8.13.0"
+    },
+    "devDependencies": {
+      "nodemon": "^3.1.9"
+    }
+  }
+  
