@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
+const cors = require('cors');
 
 // Initialize Express and HTTP server
 const app = express();
@@ -11,7 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static(path.join(__dirname, '../public')));
-
+app.use.cors();
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/client.html'));
 });
