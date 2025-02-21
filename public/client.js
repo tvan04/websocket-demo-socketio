@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const socket = io('https://websocket-demo-socketio.onrender.com'); // Connect to the server
+  const socket = io('https://websocket-demo-socketio.onrender.com/'); // Connect to the server
 
   const chat = document.getElementById('chat');
   const messageInput = document.getElementById('messageInput');
