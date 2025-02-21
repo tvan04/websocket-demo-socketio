@@ -2,14 +2,17 @@
     "name": "websocket-demo",
     "version": "1.0.0",
     "description": "A simple WebSocket demo without Socket.io",
-    "main": "server.js",
-    "type": "module",
+    "main": "server/server.js",
+    "type": "commonjs",
     "scripts": {
-        "start": "npx nodemon server.js"
+        "start": "npx nodemon server/server.js"
     },
     "author": "Your Name",
     "license": "ISC",
     "dependencies": {
+        "express": "^4.21.2",
+        "http": "^0.0.1-security",
+        "socket.io": "^4.8.1",
         "ws": "^8.13.0"
     },
     "devDependencies": {

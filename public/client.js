@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const socket = io('https://websocket-demo-socketio.onrender.com/'); // Connect to the server
+  const socket = io(); // Connect to the server
 
   const chat = document.getElementById('chat');
   const messageInput = document.getElementById('messageInput');
@@ -10,10 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
     addMessage('Connected to the server', 'received');
   });
 
-  // When a message is received from the server, display it in the chat area
-  socket.on('message', (data) => {
-    addMessage(data, 'received');
-  });
+  
+  // TODO: When a message is received from the server, display it in the chat area
+  // hint: use socket.io to get the message and use the addMessage function to display it
+  // hinthint: 'send' and 'received' dictates which messages display on the left or right side of the chat box for addMessage type parameter
+  // {Add Code Here}
+
 
   // When the connection is closed, inform the user
   socket.on('disconnect', () => {
@@ -33,12 +35,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function sendMessage() {
     const message = messageInput.value.trim();
     if (message) {
-      socket.emit('message', message); // Send the message to the server
+      //TODO: Send messages to the server
+      //add one line below this comment to send the message to the server
       addMessage(`You: ${message}`, 'sent');
       messageInput.value = '';
     }
   }
 
+  //helper function to add message to the chat 
   function addMessage(message, type) {
     const msgElement = document.createElement('div');
     msgElement.classList.add('message', type);

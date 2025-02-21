@@ -24,8 +24,9 @@ io.on('connection', (socket) => {
 
   // TODO: listen for a message event and broadcast the message to all clients except the sender
   // hint: https://socket.io/docs/v4/tutorial/step-5
-  // {Add Code Here}
-
+  socket.on('message', (msg) => {
+    socket.broadcast.emit('message', msg);
+  });
 
   // Log disconnection events
   socket.on('disconnect', () => {
